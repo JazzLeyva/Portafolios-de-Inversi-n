@@ -1,6 +1,10 @@
 library(data.table)
 library(ggplot2)
 
+
+library(data.table)
+library(ggplot2)
+
 # Directorio de trabajo
 setwd("c:/Users/Jehu/Documents/R/Portafolios-de-Inversi-n/")
 
@@ -9,26 +13,25 @@ setwd("c:/Users/Jehu/Documents/R/Portafolios-de-Inversi-n/")
 # Descargando datasets de acciones
 
 
-link1 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/Mercados/F.csv"
-link2 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/Mercados/VOO.csv"
-link3 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/Mercados/MCN.csv"
-
-# link1 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/Mercados/NEE.csv"
-# link2 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/Mercados/NESN.SW.csv"
-# link3 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/Mercados/NVDA.csv"
-
-# link1 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/Mercados/NIO.csv"
-# link2 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/Mercados/PALAF.csv"
-# link3 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/Mercados/QQQ.csv"
+# SELECCIONA TU EXPERIMENTO, OPCIONES (1,2 3)
+EXPERIMENTO = 3
 
 
-dt1 <-data.table(read.csv(link1, header=TRUE))
-dt2 <-data.table(read.csv(link2, header=TRUE))
-dt3 <-data.table(read.csv(link3, header=TRUE))
-dt = combineddataset = rbind(dt1, dt2, dt3)
+# Descargando datasets del experimentos
 
-# Convertimos la columna data en un elemento de tiempo
-dt[, date := as.Date(date)]
+if (EXPERIMENTO == 1) { # FALSE, VOO Y MCN
+  link <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/Experimentos/Experimento1.csv"
+    
+} else {
+    if(EXPERIMENTO == 2) { # NEE, NESN.S Y NVDA
+        link <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/Experimentos/Experimento2.csv"
+    } else {# NIO, PALAF Y QQQ
+        link <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/Experimentos/Experimento3.csv"
+    }
+} 
+
+# load the data
+df <- data.table(read.csv(link))
 
 df_table <- melt(df)[, .(mean = mean(value), sd = sd(value)), by = variable]
 
@@ -41,17 +44,6 @@ sd_z <- sd(df$z)
 cov_xy <- cov(df$x, df$y)
 cov_xz <- cov(df$x, df$z)
 cov_yz <- cov(df$y, df$z)
-
-er_x
-er_y
-er_z
-sd_x
-sd_y
-sd_z
-cov_xy
-cov_xz
-cov_yz
-
 
 # two assets
 two_assets_seq <- seq(from = 0, to = 1, length.out = 1000)
@@ -74,7 +66,7 @@ plot_two <- ggplot() +
   scale_x_continuous(label = percent, limits = c(0, max(two$sd_p) * 1.2)) +
   scale_color_continuous(name = expression(omega[x]), labels = percent)
 
-ggsave(plot_two, file = "two_assets.png", scale = 1, dpi = 600)
+ggsave(filename =  paste(c("resultados/Experimento",EXPERIMENTO,"/two_assets.png"),collapse=""), plot_two, scale = 1, dpi=600)
 
 # three assets
 three_assets_seq <- seq(from = 0, to = 1, length.out = 1000)
@@ -104,4 +96,5 @@ plot_three <- ggplot() +
   scale_color_gradientn(colors = c("red", "blue", "yellow"),
                         name = expression(omega[x] - omega[z]), labels = percent)
 
-ggsave(plot_three, file = "three_assets.png", scale = 1, dpi = 600)
+ggsave(filename =  paste(c("resultados/Experimento",EXPERIMENTO,"/three_assets.png"),collapse=""), plot_three, scale = 1, dpi=600)
+
