@@ -6,7 +6,7 @@ library(data.table)
 library(ggplot2)
 
 # Directorio de trabajo
-setwd("c:/Users/Jehu/Documents/R/Portafolios-de-Inversi-n/")
+setwd("c:/Users/Jazmin/Documents/R/Portafolios-de-Inversi-n/")
 
 
 

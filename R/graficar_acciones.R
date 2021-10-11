@@ -4,7 +4,7 @@ library(ggplot2)
 
 
 # Directorio de trabajo
-setwd("c:/Users/Jehu/Documents/R/Portafolios-de-Inversi-n/")
+setwd("c:/Users/Jazmin/Documents/R/Portafolios-de-Inversi-n/")
 
 # SELECCIONA TU EXPERIMENTO, OPCIONES (1,2 3)
 EXPERIMENTO = 3

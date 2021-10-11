@@ -1,6 +1,6 @@
 # load the functions, libraries etc
 
-setwd("c:/Users/Jehu/Documents/R/Portafolios-de-Inversi-n/")
+setwd("c:/Users/Jazmin/Documents/R/Portafolios-de-Inversi-n/")
 source("R/functions.R")
 
 set.seed(12345)

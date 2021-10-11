@@ -1,6 +1,6 @@
 # load the functions, libraries etc
 source("R/functions.R")
-setwd("c:/Users/Jehu/Documents/R/Portafolios-de-Inversi-n/")
+setwd("c:/Users/Jazmin/Documents/R/Portafolios-de-Inversi-n/")
 
 # SELECCIONA TU EXPERIMENTO, OPCIONES (1,2 3)
 EXPERIMENTO = 2
