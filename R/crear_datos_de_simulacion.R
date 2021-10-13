@@ -1,6 +1,6 @@
 # load the functions, libraries etc
 source("R/functions.R")
-setwd("c:/Users/Jazmin/Documents/R/Portafolios-de-Inversi-n/")
+setwd("c:/Users/Jazmin/Documents/R/TAREA2/")
 
 # SELECCIONA TU EXPERIMENTO, OPCIONES (1,2 3)
 EXPERIMENTO = 2
@@ -10,7 +10,7 @@ EXPERIMENTO = 2
 # GENERACION DE DATOS ALEATORIOS BASADO EN LA MEDIA Y VARIANZA 
 # QUE GENERO CADA ACCION
 
-if (EXPERIMENTO == 1) { # FALSE, VOO Y MCN
+if (EXPERIMENTO == 1) { # F, VOO Y MCN
     x_m = 0.0088
     x_sd = 0.1423
     y_m = 0.0107 
