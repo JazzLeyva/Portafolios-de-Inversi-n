@@ -64,7 +64,7 @@ plot_two
 
 # Calculando los retornos aritmeticos
 dt[, ret := price / shift(price, 1) - 1, by = ticker]
- 
+dt
 # Resumen de tabla
 # take only non-na values
 tab <- dt[!is.na(ret), .(ticker, ret)]
@@ -82,9 +82,9 @@ plot_three <- ggplot(tab, aes(x = sd, y = er, color = ticker)) +
   geom_point(size = 5) +
    theme_bw() + ggtitle("Compensacion riesgo - rendimiento") +
   xlab("Volatilidad") + ylab("Respuesta esperada") +
-  scale_y_continuous(label = percent, limits = c(0.0, 0.2)) +
-  scale_x_continuous(label = percent, limits = c(0.0, 0.7))
+  scale_y_continuous(label = percent, limits = c(-0.2, 0.2)) +
+  scale_x_continuous(label = percent, limits = c(-0.2, 0.7))
 plot_three
 
-ggsave(filename =  paste(c("resultados/grafico_de_portafolio.png"),collapse=""), plot_two, scale = 1, dpi=600)
-ggsave(filename =  paste(c("resultados/correlaciones_de_portafolio.png"),collapse=""), plot_three, scale = 1, dpi=600)
+#ggsave(filename =  paste(c("resultados/grafico_de_portafolio.png"),collapse=""), plot_two, scale = 1, dpi=600)
+#ggsave(filename =  paste(c("resultados/correlaciones_de_portafolio.png"),collapse=""), plot_three, scale = 1, dpi=600)

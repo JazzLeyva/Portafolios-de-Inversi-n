@@ -12,24 +12,7 @@ setwd("c:/Users/Jazmin/Documents/R/TAREA2/")
 
 # Descargando datasets de acciones
 
-
-# SELECCIONA TU EXPERIMENTO, OPCIONES (1,2 3)
-EXPERIMENTO = 3
-
-
-# Descargando datasets del experimentos
-
-if (EXPERIMENTO == 1) { # F, VOO Y MCN
-  link <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/Experimentos/Experimento1.csv"
-    
-} else {
-    if(EXPERIMENTO == 2) { # NEE, NESN.S Y NVDA
-        link <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/Experimentos/Experimento2.csv"
-    } else {# NIO, PALAF Y QQQ
-        link <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/Experimentos/Experimento3.csv"
-    }
-} 
-
+link <= "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/datos_de_simulacion.csv"
 # load the data
 df <- data.table(read.csv(link))
 df
