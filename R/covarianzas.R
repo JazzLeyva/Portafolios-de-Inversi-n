@@ -29,18 +29,6 @@ dt6 <-data.table(read.csv(link6, header=TRUE))
 dt7 <-data.table(read.csv(link7, header=TRUE))
 dt8 <-data.table(read.csv(link8, header=TRUE))
 dt9 <-data.table(read.csv(link9, header=TRUE))
-
-
-
-dt1 <-data.table(read.csv(link1, header=TRUE))
-dt2 <-data.table(read.csv(link2, header=TRUE))
-dt3 <-data.table(read.csv(link3, header=TRUE))
-dt4 <-data.table(read.csv(link4, header=TRUE))
-dt5 <-data.table(read.csv(link5, header=TRUE))
-dt6 <-data.table(read.csv(link6, header=TRUE))
-dt7 <-data.table(read.csv(link7, header=TRUE))
-dt8 <-data.table(read.csv(link8, header=TRUE))
-dt9 <-data.table(read.csv(link9, header=TRUE))
 # SELECCIONA TU EXPERIMENTO, OPCIONES (1,2 3)
 
 dt = rbind(dt1, dt2, dt3, dt4, dt5, dt6, dt7, dt8, dt9)
@@ -80,5 +68,16 @@ nio_R <- tab[ tab$"ticker" %in% c("NIO") ,c("ret") ]
 palaf_R <- tab[ tab$"ticker" %in% c("PALAF") ,c("ret") ]
 qqq_R <- tab[ tab$"ticker" %in% c("QQQ") ,c("ret") ]
 
+values = c(ford_R, voo_R, mcn_R)
 
-cov(ford, mcn)
+for (r in 1:nrow(values))
+    for (k in 1:nrow(values))
+        cpv(values[r, drop=FALSE], values[k,drop=FALSE])
+
+
+# Crea una matriz
+mat <- matriz (datos = seq (10, 20, por = 1), nrow = 6, ncol = 2)
+# Crea el ciclo con r y c para iterar sobre la matriz
+para (r en 1: nrow (mat))   
+    para (c en 1: ncol (mat))  
+         print (pegar ("Fila", r, "y columna", c, "tener valores de", mat [r, c])) 
