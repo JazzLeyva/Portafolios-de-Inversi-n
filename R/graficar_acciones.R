@@ -77,5 +77,4 @@ plot_three <- ggplot(tab, aes(x = sd, y = er, color = ticker)) +
   scale_x_continuous(label = percent, limits = c(-1, 1))
 plot_three
 
-
-ggsave(filename =  paste(c("resultados/correlaciones_de_portafolio.png"),collapse=""), plot_three, scale = 1, dpi=600)
+ggsave(filename =  paste(c("resultados/correlaciones_de_portafolio.png"), collapse=""), plot_three, scale = 1, dpi=600)
