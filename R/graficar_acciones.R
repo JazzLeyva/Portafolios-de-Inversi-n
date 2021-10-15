@@ -1,6 +1,7 @@
 library(data.table)
 library(scales)
 library(ggplot2)
+library("readxl")
 
 #para ejecutarlo lo primero que de be hacer es poner el diorectorio de trabajo como en este ejemplo
 # Directorio de trabajo
@@ -11,15 +12,15 @@ setwd('C:/Users/Jehu/Documents/R/Portafolios-de-Inversi-n/')
 
 # Descargando datasets de acciones
 
-link1 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/activos/AMZN.csv"
-link2 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/activos/CX.csv"
-link3 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/activos/FOR.csv"
-link4 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/activos/NEE.csv"
-link5 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/activos/NSRGY.csv"
-link6 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/activos/NVDA.csv"
-link7 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/activos/PALAF.csv"
-link8 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/activos/QQQ.csv"
-link9 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/activos/VOO.csv"
+link1 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/AMZN.csv"
+link2 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/CX.csv"
+link3 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/FOR.csv"
+link4 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/NEE.csv"
+link5 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/NSRGY.csv"
+link6 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/NVDA.csv"
+link7 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/PALAF.csv"
+link8 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/QQQ.csv"
+link9 <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/VOO.csv"
 
 dt1 <-data.table(read.csv(link1, header=TRUE))
 dt2 <-data.table(read.csv(link2, header=TRUE))
@@ -34,6 +35,9 @@ dt9 <-data.table(read.csv(link9, header=TRUE))
 # SELECCIONA TU EXPERIMENTO, OPCIONES (1,2 3)
 
 dt = rbind(dt1, dt2, dt3, dt4, dt5, dt6, dt7, dt8, dt9)
+
+dt$newdate <- strptime(as.character(dt$date), "%d/%m/%Y")
+dt$txtdate <- format(nzd$newdate, "%Y-%m-%d")
 
 # Convertimos la columna data en un elemento de tiempo
 dt[, date := as.Date(date)]
