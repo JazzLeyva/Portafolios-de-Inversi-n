@@ -1,56 +1,29 @@
 library(data.table)
 library(ggplot2)
-
-
 library(data.table)
-library(ggplot2)
 
 # Directorio de trabajo
 setwd("c:/Users/Jazmin/Documents/R/TAREA2/")
-
-
-
 # Descargando datasets de acciones
 
-link <= "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/Data/datos_de_simulacion.csv"
-# load the data
-df <- data.table(read.csv(link))
+link <- "https://raw.githubusercontent.com/JazzLeyva/Portafolios-de-Inversi-n/master/data/datos_de_simulacion.csv"
+df <-data.table(read.csv(link, header=TRUE))
 df
 df_table <- melt(df)[, .(mean = mean(value), sd = sd(value)), by = variable]
 df_table
+
+
+
 er_x <- mean(df$x)
-er_y <- mean(df$y)
-er_z <- mean(df$z)
+er_y <- mean(df$g)
+er_z <- mean(df$h)
 sd_x <- sd(df$x)
-sd_y <- sd(df$y)
-sd_z <- sd(df$z)
-cov_xy <- cov(df$x, df$y)
-cov_xz <- cov(df$x, df$z)
-cov_yz <- cov(df$y, df$z)
+sd_y <- sd(df$g)
+sd_z <- sd(df$h)
+cov_xy <- cov(df$x, df$g)
+cov_xz <- cov(df$x, df$h)
+cov_yz <- cov(df$g, df$h)
 
-# two assets
-two_assets_seq <- seq(from = 0, to = 1, length.out = 1000)
-
-two <- data.table(wx = two_assets_seq,
-                     wy = 1 - two_assets_seq)
-
-two[, ':=' (er_p = wx * er_x + wy * er_y,
-            sd_p = sqrt(wx^2 * sd_x^2 +
-                           wy^2 * sd_y^2 +
-                           2 * wx * (1 - wx) * cov_xy))]
-two
-two_assets_seq
-plot_a <- ggplot() +
-  geom_point(data = two, aes(x = sd_p, y = er_p, color = wx)) +
-  geom_point(data = df_table[variable != "z"],
-             aes(x = sd, y = mean), color = "red", size = 3, shape = 18) +
-  theme_bw() + ggtitle("Possible Portfolios with Two Risky Assets") +
-  xlab("Volatility") + ylab("Expected Returns") +
-  scale_y_continuous(label = percent, limits = c(0, max(two$er_p) * 1.2)) +
-  scale_x_continuous(label = percent, limits = c(0, max(two$sd_p) * 1.2)) +
-  scale_color_continuous(name = expression(omega[x]), labels = percent)
-plot_a
-#ggsave(filename =  paste(c("resultados/Experimento",EXPERIMENTO,"/two_assets.png"),collapse=""), plot_two, scale = 1, dpi=600)
 
 # three assets
 three_assets_seq <- seq(from = 0, to = 1, length.out = 1000)
@@ -79,6 +52,8 @@ plot_b <- ggplot() +
   scale_x_continuous(label = percent, limits = c(0, max(three$sd_p) * 1.2)) +
   scale_color_gradientn(colors = c("red", "blue", "yellow"),
                         name = expression(omega[x] - omega[z]), labels = percent)
+
 plot_b
-#ggsave(filename =  paste(c("resultados/Experimento",EXPERIMENTO,"/three_assets.png"),collapse=""), plot_three, scale = 1, dpi=600)
+
+ggsave(filename = "resultados/frontera_3d_amazon_qqq_voo.png", plot_b, scale = 1, dpi=600)
 
